@@ -12,14 +12,14 @@ function closeOnEscape(e) {
     const nav = document.getElementById('nav'); // nav要素を取得
     const navSections = nav.querySelector('.nav-sections'); // nav要素の子要素の.nav-sections要素を取得
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]'); // 展開されているナビゲーションセクションを取得。navSections要素の子要素で、aria-expanded属性がtrueの要素を取得
-    if (navSectionExpanded && isDesktop.matches) {  // 展開されているナビゲーションセクションが存在し、デスクトップ用の画面幅の場合
+    if (navSectionExpanded && isDesktop.matches) { // 展開されているナビゲーションセクションが存在し、デスクトップ用の画面幅の場合
       // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);  // すべてのナビゲーションセクションの展開/折りたたみを切り替え
+      toggleAllNavSections(navSections); // すべてのナビゲーションセクションの展開/折りたたみを切り替え
       navSectionExpanded.focus(); // 展開されているナビゲーションセクションにフォーカスを移動
-    } else if (!isDesktop.matches) {  // デスクトップ用の画面幅でない場合
+    } else if (!isDesktop.matches) { // デスクトップ用の画面幅でない場合
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections); // ナビゲーションを展開/折りたたみ
-      nav.querySelector('button').focus();  // ナビゲーションのハンバーガーボタンにフォーカスを移動
+      nav.querySelector('button').focus(); // ナビゲーションのハンバーガーボタンにフォーカスを移動
     }
   }
 }
@@ -27,8 +27,8 @@ function closeOnEscape(e) {
 function openOnKeydown(e) {
   const focused = document.activeElement; // フォーカスされている要素を取得
   const isNavDrop = focused.className === 'nav-drop'; // フォーカスされている要素が.nav-drop要素(ドロップダウン)かどうかを判断
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {  // フォーカスされている要素が.nav-drop要素(ドロップダウン)で、EnterキーまたはSpaceキーが押されたとき
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';  // フォーカスされている要素のaria-expanded属性の値を取得
+  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) { // フォーカスされている要素が.nav-drop要素(ドロップダウン)で、EnterキーまたはSpaceキーが押されたとき
+    const dropExpanded = focused.getAttribute('aria-expanded') === 'true'; // フォーカスされている要素のaria-expanded属性の値を取得
     // eslint-disable-next-line no-use-before-define  
     toggleAllNavSections(focused.closest('.nav-sections')); // すべてのナビゲーションセクションの展開/折りたたみを切り替え
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true'); // フォーカスされている要素のaria-expanded属性の値を切り替え
@@ -36,7 +36,7 @@ function openOnKeydown(e) {
 }
 // ナビゲーションセクションの展開/折りたたみを切り替える関数
 function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);  // フォーカスされている要素にkeydownイベントを追加
+  document.activeElement.addEventListener('keydown', openOnKeydown); // フォーカスされている要素にkeydownイベントを追加
 }
 
 /**
@@ -46,8 +46,8 @@ function focusNavSection() {
  */
 // すべてのナビゲーションセクションの展開/折りたたみを切り替える関数
 function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {  // sections要素の子要素で、.default-content-wrapper > ul > li要素を取得
-    section.setAttribute('aria-expanded', expanded);  // 取得した要素のaria-expanded属性の値を切り替え
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => { // sections要素の子要素で、.default-content-wrapper > ul > li要素を取得
+    section.setAttribute('aria-expanded', expanded); // 取得した要素のaria-expanded属性の値を切り替え
   });
 }
 
@@ -124,7 +124,7 @@ export default async function decorate(block) { // ヘッダーの装飾を行�
   if (navSections) { // navSections要素が存在する場合
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => { // navSections要素の子要素で、.default-content-wrapper > ul > li要素を取得
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop'); // 取得した要素の子要素で、ul要素が存在する場合は、取得した要素にnav-dropクラスを追加
-      navSection.addEventListener('click', () => {  // 取得した要素にclickイベントを追加
+      navSection.addEventListener('click', () => { // 取得した要素にclickイベントを追加
         if (isDesktop.matches) { // デスクトップ用の画面幅の場合
           const expanded = navSection.getAttribute('aria-expanded') === 'true'; // 取得した要素のaria-expanded属性の値を取得
           toggleAllNavSections(navSections); // すべてのナビゲーションセクションの展開/折りたたみを切り替え
@@ -135,20 +135,20 @@ export default async function decorate(block) { // ヘッダーの装飾を行�
   }
 
   // hamburger for mobile
-  const hamburger = document.createElement('div');// div要素を作成
+  const hamburger = document.createElement('div'); // div要素を作成
   hamburger.classList.add('nav-hamburger');// div要素にnav-hamburgerクラスを追加
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation"> <!-- ナビゲーションを開くボタン -->
       <span class="nav-hamburger-icon"></span> <!-- ハンバーガーアイコン -->
-    </button>`;// div要素の中身を定義
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));// div要素にclickイベントを追加
-  nav.prepend(hamburger);// nav要素の先頭にdiv要素を追加
-  nav.setAttribute('aria-expanded', 'false');// nav要素にaria-expanded属性を追加
+    </button>`; // div要素の中身を定義
+  hamburger.addEventListener('click', () => toggleMenu(nav, navSections)); // div要素にclickイベントを追加
+  nav.prepend(hamburger); // nav要素の先頭にdiv要素を追加
+  nav.setAttribute('aria-expanded', 'false'); // nav要素にaria-expanded属性を追加
   // prevent mobile nav behavior on window resize 
-  toggleMenu(nav, navSections, isDesktop.matches);// ナビゲーションを展開/折りたたみ
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));// デスクトップ用の画面幅の変更を監視して、ナビゲーションを展開/折りたたみ
+  toggleMenu(nav, navSections, isDesktop.matches); // ナビゲーションを展開/折りたたみ
+  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches)); // デスクトップ用の画面幅の変更を監視して、ナビゲーションを展開/折りたたみ
 
-  const navWrapper = document.createElement('div');// div要素を作成
-  navWrapper.className = 'nav-wrapper';// div要素にnav-wrapperクラスを追加
-  navWrapper.append(nav);// div要素にnav要素を追加
-  block.append(navWrapper);// block要素にdiv要素を追加
+  const navWrapper = document.createElement('div'); // div要素を作成
+  navWrapper.className = 'nav-wrapper'; // div要素にnav-wrapperクラスを追加
+  navWrapper.append(nav); // div要素にnav要素を追加
+  block.append(navWrapper); // block要素にdiv要素を追加
 }
