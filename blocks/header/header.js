@@ -135,20 +135,20 @@ export default async function decorate(block) { // ヘッダーの装飾を行�
   }
 
   // hamburger for mobile
-  const hamburger = document.createElement('div'); // div要素を作成
-  hamburger.classList.add('nav-hamburger'); // div要素にnav-hamburgerクラスを追加
+  const hamburger = document.createElement('div');// div要素を作成
+  hamburger.classList.add('nav-hamburger');// div要素にnav-hamburgerクラスを追加
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation"> <!-- ナビゲーションを開くボタン -->
       <span class="nav-hamburger-icon"></span> <!-- ハンバーガーアイコン -->
-    </button>`; // div要素の中身を定義
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections)); // div要素にclickイベントを追加
-  nav.prepend(hamburger); // nav要素の先頭にdiv要素を追加
-  nav.setAttribute('aria-expanded', 'false'); // nav要素にaria-expanded属性を追加
+    </button>`;// div要素の中身を定義
+  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));// div要素にclickイベントを追加
+  nav.prepend(hamburger);// nav要素の先頭にdiv要素を追加
+  nav.setAttribute('aria-expanded', 'false');// nav要素にaria-expanded属性を追加
   // prevent mobile nav behavior on window resize 
-  toggleMenu(nav, navSections, isDesktop.matches); // ナビゲーションを展開/折りたたみ
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));  // デスクトップ用の画面幅の変更を監視して、ナビゲーションを展開/折りたたみ
+  toggleMenu(nav, navSections, isDesktop.matches);// ナビゲーションを展開/折りたたみ
+  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));// デスクトップ用の画面幅の変更を監視して、ナビゲーションを展開/折りたたみ
 
-  const navWrapper = document.createElement('div'); // div要素を作成
-  navWrapper.className = 'nav-wrapper'; // div要素にnav-wrapperクラスを追加
-  navWrapper.append(nav); // div要素にnav要素を追加
-  block.append(navWrapper); // block要素にdiv要素を追加
+  const navWrapper = document.createElement('div');// div要素を作成
+  navWrapper.className = 'nav-wrapper';// div要素にnav-wrapperクラスを追加
+  navWrapper.append(nav);// div要素にnav要素を追加
+  block.append(navWrapper);// block要素にdiv要素を追加
 }
