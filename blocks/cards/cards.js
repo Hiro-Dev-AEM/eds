@@ -24,7 +24,6 @@ export default function decorate(block) {
   });
   /* ul内のimg要素をループ処理　画像を最適化して、元のpicture要素と置き換える */
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
-  
   /* 元のブロックの内容をクリアして */
   block.textContent = '';
   /* 作成したulをブロックに追加 */
