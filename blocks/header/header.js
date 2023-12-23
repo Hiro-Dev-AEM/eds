@@ -23,13 +23,13 @@ function closeOnEscape(e) {
     }
   }
 }
-// ナビゲーションセクションの展開/折りたたみを切り替える関数 
+// ナビゲーションセクションの展開/折りたたみを切り替える関数
 function openOnKeydown(e) {
   const focused = document.activeElement; // フォーカスされている要素を取得
   const isNavDrop = focused.className === 'nav-drop'; // フォーカスされている要素が.nav-drop要素(ドロップダウン)かどうかを判断
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) { // フォーカスされている要素が.nav-drop要素(ドロップダウン)で、EnterキーまたはSpaceキーが押されたとき
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true'; // フォーカスされている要素のaria-expanded属性の値を取得
-    // eslint-disable-next-line no-use-before-define  
+    // eslint-disable-next-line no-use-before-define
     toggleAllNavSections(focused.closest('.nav-sections')); // すべてのナビゲーションセクションの展開/折りたたみを切り替え
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true'); // フォーカスされている要素のaria-expanded属性の値を切り替え
   }
@@ -55,7 +55,7 @@ function toggleAllNavSections(sections, expanded = false) {
  * Toggles the entire nav ナビゲーション全体の開閉を切り替える関数
  * @param {Element} nav The container element ナビゲーションのコンテナ要素
  * @param {Element} navSections The nav sections within the container element ナビゲーションセクションの要素
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null 強制的に展開する場合に使用するオプションのパラメータ
+ * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
 
 function toggleMenu(nav, navSections, forceExpanded = null) {
@@ -97,7 +97,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) { // ヘッダーの装飾を行う関数
-  // load nav as fragment 
+  // load nav as fragment
   const navMeta = getMetadata('nav'); // ヘッダーのメタデータからnavのパスを取得
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav'; // navのパスが存在する場合は、navのパスを取得。そうでない場合は、/navを取得
   const fragment = await loadFragment(navPath); // navのパスを引数にして、loadFragment関数を実行。戻り値をfragmentに代入
@@ -105,7 +105,8 @@ export default async function decorate(block) { // ヘッダーの装飾を行�
   // decorate nav DOM
   const nav = document.createElement('nav'); // nav要素を作成
   nav.id = 'nav'; // nav要素にid属性を追加
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild); // fragment要素の最初の子要素が存在する場合は、nav要素に追加
+  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  // fragment要素の最初の子要素が存在する場合は、nav要素に追加
 
   const classes = ['brand', 'sections', 'tools']; // クラス名を定義
   classes.forEach((c, i) => { // classes要素の各要素に対して、以下の処理を実行
@@ -143,7 +144,7 @@ export default async function decorate(block) { // ヘッダーの装飾を行�
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections)); // div要素にclickイベントを追加
   nav.prepend(hamburger); // nav要素の先頭にdiv要素を追加
   nav.setAttribute('aria-expanded', 'false'); // nav要素にaria-expanded属性を追加
-  // prevent mobile nav behavior on window resize 
+  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches); // ナビゲーションを展開/折りたたみ
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches)); // デスクトップ用の画面幅の変更を監視して、ナビゲーションを展開/折りたたみ
 
