@@ -36,7 +36,7 @@ const embedYoutube = (url, autoplay) => {
   </div>`;
   return embedHTML;
 };
-  
+
 const embedVimeo = (url, autoplay) => {
   const [, video] = url.pathname.split('/');
   const suffix = autoplay ? '?muted=1&autoplay=1' : '';
@@ -59,7 +59,7 @@ const loadEmbed = (block, link, autoplay) => {
   if (block.classList.contains('embed-is-loaded')) {
     return;
   }
-  
+
   const EMBEDS_CONFIG = [
     {
       match: ['youtube', 'youtu.be'],
@@ -90,7 +90,7 @@ export default function decorate(block) {
   const placeholder = block.querySelector('picture');
   const link = block.querySelector('a').href;
   block.textContent = '';
-  
+
   if (placeholder) {
     const wrapper = document.createElement('div');
     wrapper.className = 'embed-placeholder';
