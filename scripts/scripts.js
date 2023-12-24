@@ -13,13 +13,12 @@ import {
   loadCSS,
 } from './aem.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
-
 const AUDIENCES = {
   mobile: () => window.innerWidth < 600,
   desktop: () => window.innerWidth >= 600,
   // define your custom audiences here as needed
 };
+const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 window.hlx.plugins.add('experimentation', {
   condition: () => getMetadata('experiment')
