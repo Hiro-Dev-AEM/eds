@@ -12,12 +12,6 @@ import {
   loadBlocks,
   loadCSS,
 } from './aem.js';
-
-const AUDIENCES = {
-  mobile: () => window.innerWidth < 600,
-  desktop: () => window.innerWidth >= 600,
-  // define your custom audiences here as needed
-};
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 window.hlx.plugins.add('experimentation', {
@@ -27,6 +21,11 @@ window.hlx.plugins.add('experimentation', {
   options: { audiences: AUDIENCES },
   url: '/plugins/experimentation/src/index.js',
 });
+const AUDIENCES = {
+  mobile: () => window.innerWidth < 600,
+  desktop: () => window.innerWidth >= 600,
+  // define your custom audiences here as needed
+};
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
